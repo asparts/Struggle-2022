@@ -54,6 +54,11 @@ namespace StarterAssets
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
 
+        //TODO: CHECK
+        //Mycode starts
+        public bool pauseRotation = false;
+            //MyCode Ends
+        
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
@@ -90,6 +95,8 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+
+            startRotation();
 		}
 
 		private void Update()
@@ -113,8 +120,8 @@ namespace StarterAssets
 
 		private void CameraRotation()
 		{
-			// if there is an input
-			if (_input.look.sqrMagnitude >= _threshold)
+            // if there is an input
+            if (_input.look.sqrMagnitude >= _threshold && !pauseRotation)
 			{
 				_cinemachineTargetPitch += _input.look.y * RotationSpeed * Time.deltaTime;
 				_rotationVelocity = _input.look.x * RotationSpeed * Time.deltaTime;
@@ -243,5 +250,18 @@ namespace StarterAssets
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
-	}
+
+        //TODO: CHECK
+        //MyCode Starts
+
+        private void stopRotation()
+        {
+            pauseRotation = true;
+        }
+        private void startRotation()
+        {
+            pauseRotation = false;
+        }
+        //MyCode ENDS
+    }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class PlayerRaycast : MonoBehaviour
 {
@@ -13,12 +14,17 @@ public class PlayerRaycast : MonoBehaviour
     public LayerMask interactibleLayerMask = 6;
     [SerializeField] private Image uiCrosshair;
 
+    //TODO: move this
+    public GameObject InventoryUI;
+    bool inventoryActive = false;
+    public GameObject FirstPersonControllerParent;
+
     [SerializeField] private InputActionAsset playerControls;
 
 
     private void Start()
     {
-            
+
     }
     private void Awake()
     {
@@ -49,7 +55,27 @@ public class PlayerRaycast : MonoBehaviour
             CrosshairNormal();
         }
 
+        //TODO: Move this somewhere else, Dependent on GameObject InventoryUI
+        if (Keyboard.current.iKey.wasPressedThisFrame)
+        {
+            if (inventoryActive == false) {
+                InventoryUI.GetComponent<Canvas>().enabled = true;
+                inventoryActive = true;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                FirstPersonControllerParent.SendMessage("stopRotation");
+                
+            }
+            else
+            {
+                InventoryUI.GetComponent<Canvas>().enabled = false;
+                inventoryActive = false;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                FirstPersonControllerParent.SendMessage("startRotation");
+            }
 
+        }
     }
     void CrosshairActive()
     {
@@ -59,5 +85,11 @@ public class PlayerRaycast : MonoBehaviour
     void CrosshairNormal()
     {
         uiCrosshair.color = Color.black;
+    }
+
+    //TODO: Move this
+    private bool isMouseOverUI() {
+
+        return EventSystem.current.IsPointerOverGameObject();
     }
 }
