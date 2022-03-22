@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Clock : MonoBehaviour
 {
 
-    private const int TIMESCALE = 60;
+    private const int TIMESCALE = 60; // larger number == Faster seconds
 
     public Text clockText;
     public Text dayText;
@@ -17,6 +17,15 @@ public class Clock : MonoBehaviour
 
     public static double minute, hour, day, second, month, year;
 
+
+    //FOR CALLS TO GLOBALSTATS
+    public GameObject GlobalStatsBars;
+    private GlobalStats globalStatsScript;
+
+    void Awake()
+    {
+        globalStatsScript = GlobalStatsBars.GetComponent<GlobalStats>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -31,8 +40,16 @@ public class Clock : MonoBehaviour
     void Update()
     {
         CalculateTime();
-
         CalculateSeason();
+
+        //CALLS TO GLOBALSTATS
+        CallThirst();
+        CallHunger();
+        CallAnxiety();
+        CallDepression();
+        CallDirtiness();
+        CallFatigue();
+
     }
     void TextCallFunction()
     {
@@ -179,4 +196,68 @@ public class Clock : MonoBehaviour
             return "th";
         }
     }
+
+    public void addHours(double hours)
+    {
+        
+    }
+
+    // CALLS TO GLOBALSTATS TO MAINTAIN STATS
+    private void CallWarmth() //TODO: Affected by clothes player wears
+    {
+        if (second % 6 == 0)
+        {
+            //globalStatsScript.DecreaseWarmth(0.15f);
+        }
+    }
+    private void CallThirst()
+    {
+        if (second % 6 == 0)
+        {
+            globalStatsScript.AddThirst(0.15f);
+        }
+    }
+    private void CallHunger()
+    {
+        if (second % 6 == 0)
+        {
+            globalStatsScript.AddHunger(0.15f);
+        }
+    }
+    private void CallAnxiety()
+    {
+        if (second % 6 == 0)
+        {
+            globalStatsScript.AddAnxiety(0.15f);
+        }
+    }
+    private void CallDepression()
+    {
+        if (second % 6 == 0)
+        {
+            globalStatsScript.AddDepression(0.15f);
+        }
+    }
+    private void CallDirtiness()
+    {
+        if (second % 6 == 0)
+        {
+            globalStatsScript.AddDirtiness(0.15f);
+        }
+    }
+    private void CallFatigue()
+    {
+        if (second % 6 == 0)
+        {
+            globalStatsScript.AddFatigue(0.15f);
+        }
+    }
+    private void CallMoney()
+    {
+        if(day == 25)
+        {
+            globalStatsScript.AddMoney(2700);
+        }
+    }
+
 }
