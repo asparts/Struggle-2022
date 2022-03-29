@@ -39,11 +39,12 @@ public class ComputerController : MonoBehaviour
     public void Interact()
     {
 
-       
+        fade.GetComponentInParent<Canvas>().enabled = true;
         fade.GetComponent<Animator>().Play("FadeInAnim");
-        
-        fade.GetComponent<Animator>().Play("FadeOut");
         computerUI.GetComponent<Canvas>().enabled = true;
+        fade.GetComponent<Animator>().Play("FadeOut");
+        fade.GetComponentInParent<Canvas>().enabled = false;
+        
 
 
 

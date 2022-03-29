@@ -30,11 +30,13 @@ public class ShowerController : MonoBehaviour
     public void Interact()
     {
 
+        fade.GetComponentInParent<Canvas>().enabled = true;
         fade.GetComponent<Animator>().Play("FadeInAnim");
         fade.GetComponent<Animator>().Play("FadeOut");
         globalStatsScript.DecreaseThirst(10);
         globalStatsScript.DecreaseDirtiness(100);
 
+        fade.GetComponentInParent<Canvas>().enabled = false;
 
     }
 }

@@ -15,6 +15,7 @@ public class GlobalStats : MonoBehaviour
     private float health = 100;
     private float fatigue = 20;
     private float money = 1000;
+    //TODO: TOILET USAGE
     //[Space]
     //[SerializeField] TIME
 

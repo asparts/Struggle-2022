@@ -30,9 +30,10 @@ public class BedController : MonoBehaviour
     }
     public void Interact()
     {
-
+        fade.GetComponentInParent<Canvas>().enabled = true;
         fade.GetComponent<Animator>().Play("FadeInAnim");
         fade.GetComponent<Animator>().Play("FadeOut");
+        fade.GetComponentInParent<Canvas>().enabled = false;
         globalStatsScript.DecreaseFatigue(100);
 
     }

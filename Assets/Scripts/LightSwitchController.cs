@@ -11,6 +11,14 @@ public class LightSwitchController : MonoBehaviour
 
 
     //TODO: GlobalStats --> Electricityusage
+    public GameObject GlobalElectricity;
+    private GlobalElectricity globalElectricityScript;
+
+
+    void Awake()
+    {
+        globalElectricityScript = GlobalElectricity.GetComponent<GlobalElectricity>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -32,11 +40,13 @@ public class LightSwitchController : MonoBehaviour
             lamp.SetActive(false);
 
             lightSwitchOn = false;
+            globalElectricityScript.DecreaseConsume(0.06f);
         }
         else if (!lightSwitchOn)
         {
             lamp.SetActive(true);
             lightSwitchOn = true;
+            globalElectricityScript.AddConsume(0.06f);
         }
 
 

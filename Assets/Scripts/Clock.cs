@@ -21,10 +21,16 @@ public class Clock : MonoBehaviour
     //FOR CALLS TO GLOBALSTATS
     public GameObject GlobalStatsBars;
     private GlobalStats globalStatsScript;
+    //FOR CALLS TO GLOBALELECTRICITY
+    public GameObject GlobalElectricity;
+    private GlobalElectricity globalElectricityScript;
+    private string monthFromLastCall;
 
     void Awake()
     {
         globalStatsScript = GlobalStatsBars.GetComponent<GlobalStats>();
+        globalElectricityScript = GlobalElectricity.GetComponent<GlobalElectricity>();
+        monthFromLastCall = "January";
     }
 
     // Start is called before the first frame update
@@ -49,6 +55,9 @@ public class Clock : MonoBehaviour
         CallDepression();
         CallDirtiness();
         CallFatigue();
+
+        //CALLS TO ELECTRICITY
+        CallElectricity();
 
     }
     void TextCallFunction()
@@ -257,6 +266,21 @@ public class Clock : MonoBehaviour
         if(day == 25)
         {
             globalStatsScript.AddMoney(2700);
+        }
+    }
+    private void CallElectricity()
+    {
+
+        
+
+        if(second % 6 == 0)
+        {
+            globalElectricityScript.IncreaseAmountConsumed();
+        }
+        if (!monthFromLastCall.Equals(month))
+        {
+            globalElectricityScript.SetBill();
+            globalElectricityScript.WipeAmountConsumed();
         }
     }
 
