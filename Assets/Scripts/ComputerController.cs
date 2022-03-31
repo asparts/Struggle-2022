@@ -14,6 +14,8 @@ public class ComputerController : MonoBehaviour
     [SerializeField] GameObject studyButton;
     [SerializeField] GameObject payBillsButton;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,5 +54,8 @@ public class ComputerController : MonoBehaviour
 
     //TODO: Shit to affect on GLOBAL STATS
 
+    public void ActivateBillsPage()
+    {
 
+    }
 }

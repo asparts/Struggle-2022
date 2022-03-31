@@ -81,9 +81,9 @@ public class GlobalBills : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //////////////TODO:
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        //////////////TODO: SET THIS ON ONLY WHEN THIS SHIT IS ON..
+        //Cursor.visible = true;
+        //Cursor.lockState = CursorLockMode.None;
 
         ///////////////
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Clock : MonoBehaviour
 {
 
-    private const int TIMESCALE = 60; // larger number == Faster seconds
+    private const int TIMESCALE = 6000; // larger number == Faster seconds
 
     public Text clockText;
     public Text dayText;
@@ -25,12 +25,18 @@ public class Clock : MonoBehaviour
     public GameObject GlobalElectricity;
     private GlobalElectricity globalElectricityScript;
     private string monthFromLastCall;
+    //FOR CALLS TO DAYNIGHTCYCLE
+    public GameObject DayNightCycle;
+    private DayNightCycle dayNightCycleScript;
 
     void Awake()
     {
         globalStatsScript = GlobalStatsBars.GetComponent<GlobalStats>();
         globalElectricityScript = GlobalElectricity.GetComponent<GlobalElectricity>();
         monthFromLastCall = "January";
+
+        dayNightCycleScript = DayNightCycle.GetComponent<DayNightCycle>();
+
     }
 
     // Start is called before the first frame update
@@ -47,6 +53,9 @@ public class Clock : MonoBehaviour
     {
         CalculateTime();
         CalculateSeason();
+
+        //CALLTODAYNIGHT
+        dayNightCycleScript.UpdateTime((float)hour, (float)minute);
 
         //CALLS TO GLOBALSTATS
         CallThirst();
